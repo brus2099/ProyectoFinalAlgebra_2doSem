@@ -13,9 +13,10 @@ void portada(){
 
 void prueba(){
 	
-	int incog, equal, i, j;
+	int incog, i, j;
 	double matriz[10][10], igual[10];
-	double resul[10][10], valor[10];
+	double iden[10][10], resul[10];
+	double piv;
 	
 	printf("No de incognitas: ");
 	scanf("%i", &incog);
@@ -24,43 +25,53 @@ void prueba(){
 	//captura de matriz
 	for ( i=0 ; i<=incog-1 ; i++){
 		for ( j=0 ; j<=incog-1 ; j++){
-			printf("\nintrodice valor de matriz posic (%i,%i): ", i, j);
-			scanf("%i", &matriz[i][j]);
+			printf("\nintrodice valor de matriz posic (%i,%i): ", i+1, j+1);
+			scanf("%d", &matriz[i][j]);
 		}
 	}
 	
 	//captura de igualacion
 	for ( j=0 ; j<=incog-1 ; j++){
-			printf("\nintrodice valor de igualacion %i: ", j);
-			scanf("%i", &igual[j]);
+			printf("\nintrodice valor de igualacion %i: ", j+1);
+			scanf("%d", &igual[j]);
 	}
 	
 	//impresion de matriz
 	for ( i=0 ; i<=incog-1 ; i++){
 		printf("\n");
 		for ( j=0 ; j<=incog-1 ; j++){
-			printf("\t%i", matriz[i][j]);
+			printf("\t%d", matriz[i][j]);
 		}
-		printf("|\t%i ", igual[i]);
+		printf("|\t%d ", igual[i]);
 	}
 	
 	//crear pivote
-	resul[0][0] = matriz[0][0]/matriz[0][0];
-	resul[0][1] = matriz[0][1]/matriz[0][0];
-	resul[0][2] = matriz[0][2]/matriz[0][0];
-	valor[0] = igual[0]/matriz[0][0];
+	iden[0][0] = 5/*(matriz[0][0])/(matriz[0][0])*/;
+	iden[0][1] = matriz[0][1]/matriz[0][0];
+	iden[0][2] = matriz[0][2]/matriz[0][0];
+	resul[0] = igual[0]/matriz[0][0];
+	piv = iden[0][0];
+	printf("\n%d %d", matriz[0][0], iden[0][0] );
+	//ceros en la 1ra fila
+	iden[1][0] = matriz[1][0]-matriz[1][0]*piv;
+	iden[1][1] = matriz[1][1]-matriz[1][0]*piv;
+	iden[1][2] = matriz[1][2]-matriz[1][0]*piv;
+	resul[1] = igual[1]-matriz[1][0]*piv;
 	
-	//ceros en las demas filas
-	resul[1][0] = matriz[1][0]-
-
+	//ceros en 2da fila
+	iden[2][0] = matriz[2][0]-matriz[2][0]*piv;
+	iden[2][1] = matriz[2][1]-matriz[2][0]*piv;
+	iden[2][2] = matriz[2][2]-matriz[2][0]*piv;
+	resul[2] = igual[2]-matriz[2][0]*piv;
+	
+	printf("\n");
 	for ( i=0 ; i<=incog-1 ; i++){
 		printf("\n");
 		for ( j=0 ; j<=incog-1 ; j++){
-			printf("\t%i", resul[i][j]);
+			printf("\t%d", iden[i][j]);
 		}
-		printf("|\t%i ", valor[i]);
+		printf("|\t%d ", resul[i]);
 	}
-	
 }
 
 int main(){
